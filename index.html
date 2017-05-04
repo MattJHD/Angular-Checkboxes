@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org.1999.xhtml" xml:lang="fr" lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE-edge">
+
+		<title>Checkbox</title>
+
+
+	    <link href="css/style.css" rel="stylesheet" />
+
+	   
+	</head>
+
+	<body>
+		<div ng-app="Checkbox">
+
+			<div ng-controller="checkboxController">
+
+			<table class="table table-bordered table-hover table-striped spacer">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Salle</th>
+						<th ng-repeat="date in datesSondage">{{date}}</th>
+						<th>Non sondés</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr ng-repeat="data in dateSondClub track by $index" ng-init="sond=true">
+					
+						<td>{{data.id}}</td>
+						<td>{{data.medianame}}</td>
+						
+							<td ng-repeat="date in datesSondage track by $index">
+
+									<div ng-if="data.datesondage[date].pige == 0">
+										<input type="checkbox" ng-checked="data.checked" data-toggle="toggle" data-size="mini" ng-click="clearCheck(dateSondClub, $index)"/>
+										{{data.noSond}}
+										{{$index}}
+										{{$parent.$parent.$index}}
+									</div>
+									<div ng-if="data.datesondage[date].pige == 1">
+										<input type="checkbox" ng-checked="!data.checked" data-toggle="toggle" data-size="mini" ng-init="data.noSond=false"/>
+										{{data.noSond}}
+									</div>
+									<div ng-if="data.datesondage[date].pige == 2">
+										<p>S</p>
+										{{data.noSond}}
+									</div>
+									<div ng-if="data.datesondage[date].pige == 3">
+										<p>NS</p>
+										{{data.noSond}}
+									</div>
+
+							</td>                                                                    	
+
+							<td>								
+								<input checked type="checkbox" ng-checked="data.noSond" data-toggle="toggle" data-size="mini" ng-click="clearCheck(data)"/>
+								{{data.noSond}}
+								{{$index}}
+							</td>
+					</tr>
+					
+				</tbody>
+
+			</table>
+
+			</div>
+
+				
+	    </div>
+		 
+	</body>
+		<script type="text/javascript" src="js/angular.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+</html>
